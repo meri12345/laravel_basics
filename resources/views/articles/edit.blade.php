@@ -7,37 +7,29 @@
 @section('content')
     <div id="wrapper">
         <div id="page" class="container">
-            <h1 class="title">New Article</h1>
+            <h1 class="title">Update Article</h1>
 
-            <form action="/articles" method="POST">
+            <form action="/articles/{{$article->id}}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="field">
                     <label for="title" class="label">Title</label>
                     <div class="control">
-                        <input id="title" value="{{old('title')}}" type="text" class="input @error('title') is-danger @enderror" name="title">
-                        @error('title')
-                        <div class="help is-danger">{{$errors->first('title')}}</div>
-                            @enderror
+                        <input id="title" type="text" class="input" name="title" value="{{$article->title}}">
                     </div>
                 </div>
 
                 <div class="field">
                     <label for="excerpt" class="label">Excerpt</label>
                     <div class="control">
-                        <textarea id="excerpt" class="input @error('excerpt') is-danger @enderror" name="excerpt">{{old('excerpt')}}</textarea>
-                            @error('excerpt')
-                        <div class="help is-danger">{{$errors->first('excerpt')}}</div>
-                        @enderror
+                        <textarea id="excerpt" class="input" name="excerpt">{{$article->excerpt}}</textarea>
                     </div>
                 </div>
 
                 <div class="field">
                     <label for="body" class="label">Body</label>
                     <div class="control">
-                        <textarea id="body" class="input @error('body') is-danger @enderror" name="body">{{old('body')}}</textarea>
-                        @error('body')
-                        <div class="help is-danger">{{$errors->first('body')}}</div>
-                        @enderror
+                        <textarea id="body" class="input" name="body">{{$article->body}}</textarea>
                     </div>
                 </div>
 

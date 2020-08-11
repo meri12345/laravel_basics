@@ -26,13 +26,41 @@ class ArticlesController extends Controller
        return view('articles.create');
     }
     public function store(){
-        //persist resource
+
+        request()->validate([
+            'title'=>'required',
+            'body'=> 'required',
+            'excerpt' =>'required'
+        ]);
+        $article=new Article();
+        $article->title=request('title');
+        $article->body=request('body');
+        $article->excerpt=request('excerpt');
+
+        $article->save();
+
+        return redirect('/articles');
     }
-    public function edit(){
-        //show form to edit resource
+    public function edit($id){
+        $article=Article::find($id);
+        return view('articles.edit',[
+            'article'=>$article
+        ]);
     }
-    public function update(){
-        //persist the change
+    public function update($id){
+        request()->validate([
+            'title'=>'required',
+            'body'=> 'required',
+            'excerpt' =>'required'
+        ]);
+        $article=Article::find($id);
+        $article->title=request('title');
+        $article->body=request('body');
+        $article->excerpt=request('excerpt');
+
+        $article->save();
+
+        return redirect("/articles/$id");
     }
     public function destroy(){
         //delete resource
