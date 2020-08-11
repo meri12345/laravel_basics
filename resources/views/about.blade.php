@@ -18,7 +18,7 @@
                     @foreach($articles as $article)
                     <li class="first">
                         <h3>{{$article->title}}</h3>
-                        <p><a href="/articles/{{$article->id}}">{{$article->excerpt}}</a></p>
+                        <p><a href={{route('articles.show',$article->id)}}">{{$article->excerpt}}</a></p>
                     </li>
                     @endforeach
                 </ul>

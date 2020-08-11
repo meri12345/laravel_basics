@@ -15,9 +15,9 @@ class ArticlesController extends Controller
         ]);
 
     }
-    public function show($id){
+    public function show(Article $article){
         //show single resource
-        $article=Article::find($id);
+
         return view('articles.show',[
             'article'=>$article
         ]);
@@ -27,42 +27,31 @@ class ArticlesController extends Controller
     }
     public function store(){
 
-        request()->validate([
-            'title'=>'required',
-            'body'=> 'required',
-            'excerpt' =>'required'
-        ]);
-        $article=new Article();
-        $article->title=request('title');
-        $article->body=request('body');
-        $article->excerpt=request('excerpt');
-
-        $article->save();
+        Article::create($this->valildateArticle());
 
         return redirect('/articles');
     }
-    public function edit($id){
-        $article=Article::find($id);
+    public function edit(Article $article){
+
         return view('articles.edit',[
             'article'=>$article
         ]);
     }
-    public function update($id){
-        request()->validate([
+    public function update(Article $article){
+
+
+        $article->update($this->valildateArticle());
+
+        return redirect($article->path());
+    }
+    public function destroy(){
+        //delete resource
+    }
+    public function valildateArticle(){
+        return request()->validate([
             'title'=>'required',
             'body'=> 'required',
             'excerpt' =>'required'
         ]);
-        $article=Article::find($id);
-        $article->title=request('title');
-        $article->body=request('body');
-        $article->excerpt=request('excerpt');
-
-        $article->save();
-
-        return redirect("/articles/$id");
-    }
-    public function destroy(){
-        //delete resource
     }
 }

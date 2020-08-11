@@ -12,7 +12,7 @@
                         <li class="first">
                             <div id="content">
                                 <h3>{{$article->title}}</h3>
-                                <p><a href="/articles/{{$article->id}}">{{$article->excerpt}}</a></p>
+                                <p><a href="{{$article->path()}}">{{$article->excerpt}}</a></p>
                                 <div class="title">
                                     <p><img src="images/banner.jpg" alt="" class="image image-full" /> </p>
                                 </div>
